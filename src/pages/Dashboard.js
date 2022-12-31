@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Footer from '../components/footer/Footer';
+import Header from '../components/header/Header';
 import SideMenu from '../components/sideMenu/SideMenu';
 
 const Dashboard = () => {
@@ -11,7 +13,7 @@ const Dashboard = () => {
 
         <div className='h-screen'>
 
-          {/* Header goes here */}
+          <Header />
 
           <div className='p-7 font-semibold flex-1'>
             <h1 className='text-4xl'>Dashboard</h1>
