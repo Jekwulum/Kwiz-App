@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   AccountIcon, AnalyticsIcon, ArrowCircleIcon, DashboardIcon, FilesIcon, FireIcon,
   InboxIcon, ScheduleIcon, SearchIcon, SettingsIcon
@@ -34,12 +35,14 @@ const SideMenu = () => {
       </div>
       <ul className="pt-6">
         {Menus.map((menu, index) => (
-          <li key={index} className={`text-cust-light text-xl flex items-center 
-          gap-x-4 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
-          ${menu.gap ? "mt-9" : "mt-2"}`}>
-            {menu.icon}
-            <span className={`duration-300 ${!showMenu && 'scale-0'}`}>{menu.title}</span>
-          </li>
+          <NavLink to={`/${menu.title.toLowerCase()}`}>
+            <li key={index} className={`text-cust-light text-xl flex items-center 
+            gap-x-4 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
+            ${menu.gap ? "mt-9" : "mt-2"}`}>
+              {menu.icon}
+              <span className={`duration-300 ${!showMenu && 'scale-0'}`}>{menu.title}</span>
+            </li>
+          </NavLink>
         ))}
       </ul>
       <div>
