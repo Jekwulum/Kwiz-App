@@ -1,13 +1,16 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
 import Dashboard from "./pages/Dashboard";
-import SideMenu from './components/sideMenu/SideMenu';
+// import SideMenu from './components/sideMenu/SideMenu';
 
 function App() {
   return (
-    <div className='flex'>
-      <SideMenu />
-      <Dashboard />
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
