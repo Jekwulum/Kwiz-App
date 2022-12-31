@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { ArrowCircleIcon, FireIcon, DashboardIcon } from "../svgIcons/MenuIcons";
+import { ArrowCircleIcon, FireIcon, DashboardIcon, InboxIcon } from "../svgIcons/MenuIcons";
 
 const SideMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
   const Menus = [
-    { title: "Dashboard", "icon": <DashboardIcon /> },
-    { title: "Inbox", src: "chat" },
+    { title: "Dashboard", icon: <DashboardIcon /> },
+    { title: "Inbox", icon: <InboxIcon /> },
     { title: "Accounts", src: "user", gap: true },
     { title: "Schedule ", src: "Calendar" },
     { title: "Search", src: "Search" },
     { title: "Analytics", src: "Chart" },
     { title: "Files ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
+    { title: "Settings", src: "Setting" },
   ];
   return (
     <div className={`${showMenu ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-cust-green relative`}>
