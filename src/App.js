@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import Files from './pages/Files';
 import Inbox from "./pages/Inbox";
 import Schedule from './pages/Schedule';
+import Search from './pages/Search';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -18,10 +20,8 @@ function App() {
         <Route exact path='/files' element={<Files />} />
         <Route exact path='/inbox' element={<Inbox />} />
         <Route exact path='/schedule' element={<Schedule />} />
-        <Route exact path='/' element={<Dashboard />} />
-        <Route exact path='/' element={<Dashboard />} />
-        <Route exact path='/' element={<Dashboard />} />
-        <Route exact path='/' element={<Dashboard />} />
+        <Route exact path='/search' element={<Search />} />
+        <Route exact path='/settings' element={<Settings />} />
       </Routes>
     </Router>
   );
