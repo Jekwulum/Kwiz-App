@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import SideMenu from '../components/sideMenu/SideMenu';
 
@@ -11,7 +13,7 @@ const Accounts = () => {
 
         <div className='h-screen'>
 
-          {/* Header goes here */}
+          <Header />
 
           <div className='p-7 font-semibold flex-1'>
             <h1 className='text-4xl'>Accounts</h1>
