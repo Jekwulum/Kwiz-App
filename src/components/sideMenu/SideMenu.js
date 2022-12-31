@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { ArrowCircleIcon, FireIcon, DashboardIcon, InboxIcon } from "../svgIcons/MenuIcons";
+import {
+  AccountIcon, AnalyticsIcon, ArrowCircleIcon, DashboardIcon, FilesIcon, FireIcon,
+  InboxIcon, ScheduleIcon, SearchIcon, SettingsIcon
+} from "../svgIcons/MenuIcons";
 
 const SideMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
   const Menus = [
     { title: "Dashboard", icon: <DashboardIcon /> },
     { title: "Inbox", icon: <InboxIcon /> },
-    { title: "Accounts", src: "user", gap: true },
-    { title: "Schedule ", src: "Calendar" },
-    { title: "Search", src: "Search" },
-    { title: "Analytics", src: "Chart" },
-    { title: "Files ", src: "Folder", gap: true },
-    { title: "Settings", src: "Setting" },
+    { title: "Accounts", icon: <AccountIcon />, gap: true },
+    { title: "Schedule ", icon: <ScheduleIcon /> },
+    { title: "Search", icon: <SearchIcon /> },
+    { title: "Analytics", icon: <AnalyticsIcon /> },
+    { title: "Files ", icon: <FilesIcon />, gap: true },
+    { title: "Settings", icon: <SettingsIcon /> },
   ];
   return (
     <div className={`${showMenu ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-cust-green relative`}>
