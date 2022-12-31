@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Accounts from './pages/Accounts';
+import Analytics from './pages/Analytics';
 import Dashboard from "./pages/Dashboard";
 import Inbox from "./pages/Inbox";
 // import SideMenu from './components/sideMenu/SideMenu';
@@ -11,9 +12,9 @@ function App() {
     <Router>
       <Routes>
         {["/", "/dashboard", "/home"].map(path => <Route path={path} element={<Dashboard />} />)}
-        <Route exact path='/inbox' element={<Inbox />} />
         <Route exact path='/accounts' element={<Accounts />} />
-        <Route exact path='/' element={<Dashboard />} />
+        <Route exact path='/inbox' element={<Inbox />} />
+        <Route exact path='/analytics' element={<Analytics />} />
         <Route exact path='/' element={<Dashboard />} />
         <Route exact path='/' element={<Dashboard />} />
         <Route exact path='/' element={<Dashboard />} />
