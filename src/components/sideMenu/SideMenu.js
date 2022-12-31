@@ -24,7 +24,7 @@ const SideMenu = () => {
       />
 
       <div className="flex gap-x-4 items-center">
-        <FireIcon classProps={`cursor-pointer duration-500 text-cust-light`} />
+        <FireIcon classProps={`cursor-pointer duration-500 text-cust-light ${showMenu && "rotate-[360deg]"}`} />
 
         <h1
           className={`text-cust-light origin-left font-medium text-xl duration-300 font-mono
@@ -35,10 +35,10 @@ const SideMenu = () => {
       <ul className="pt-6">
         {Menus.map((menu, index) => (
           <li key={index} className={`text-cust-light text-xl flex items-center 
-          gap-x-2 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
+          gap-x-4 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
           ${menu.gap ? "mt-9" : "mt-2"}`}>
             {menu.icon}
-            <span>{menu.title}</span>
+            <span className={`duration-300 ${!showMenu && 'scale-0'}`}>{menu.title}</span>
           </li>
         ))}
       </ul>
