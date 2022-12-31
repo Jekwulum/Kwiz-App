@@ -32,7 +32,7 @@ const SideMenu = () => {
       <ul className="pt-6">
         {Menus.map((menu, index) => (
           <li key={index} className={`text-cust-light text-xl flex items-center 
-          gap-x-2 cursor-pointer py-2 hover:bg-cust-light/25 hover:rounded-md
+          gap-x-2 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
           ${menu.gap ? "mt-9" : "mt-2"}`}>
             {menu.icon}
             <span>{menu.title}</span>

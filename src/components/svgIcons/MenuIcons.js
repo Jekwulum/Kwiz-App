@@ -18,16 +18,10 @@ export const ArrowCircleIcon = ({ classProps, showMenu, setShowMenu }) => (
 
 export const DashboardIcon = () => (
   <div>
-    <svg xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-file-analytics text-cust-light"
-      width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-      <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-      <line x1="9" y1="17" x2="9" y2="12" />
-      <line x1="12" y1="17" x2="12" y2="16" />
-      <line x1="15" y1="17" x2="15" y2="14" />
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-cust-light">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
     </svg>
+
   </div>
 );
 
