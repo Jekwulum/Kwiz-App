@@ -6,7 +6,7 @@ import Analytics from './pages/Analytics';
 import Dashboard from "./pages/Dashboard";
 import Files from './pages/Files';
 import Inbox from "./pages/Inbox";
-
+import Schedule from './pages/Schedule';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route exact path='/analytics' element={<Analytics />} />
         <Route exact path='/files' element={<Files />} />
         <Route exact path='/inbox' element={<Inbox />} />
-        <Route exact path='/' element={<Dashboard />} />
+        <Route exact path='/schedule' element={<Schedule />} />
         <Route exact path='/' element={<Dashboard />} />
         <Route exact path='/' element={<Dashboard />} />
         <Route exact path='/' element={<Dashboard />} />
