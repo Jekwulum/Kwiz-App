@@ -22,7 +22,7 @@ export const ArrowCircleIcon = ({ classProps, showMenu, setShowMenu }) => (
     <svg xmlns="http://www.w3.org/2000/svg"
       class={`icon icon-tabler icon-tabler-arrow-up-circle  -right-6 top-9 text-5x
       border-none rounded-full ${!showMenu ? 'rotate-90' : '-rotate-90'} ${classProps}`}
-      width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#147d1b" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <circle cx="12" cy="12" r="9" />
       <line x1="12" y1="8" x2="8" y2="12" />
