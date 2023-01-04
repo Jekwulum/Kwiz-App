@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
-  AccountIcon, AnalyticsIcon, ArrowCircleIcon, DashboardIcon, FilesIcon, FireIcon,
+  AccountIcon, AnalyticsIcon, ArrowCircleIcon, DashboardIcon, FilesIcon, AppIcon,
   InboxIcon, ScheduleIcon, SearchIcon, SettingsIcon
 } from "../svgIcons/MenuIcons";
 
@@ -25,7 +25,7 @@ const SideMenu = () => {
       />
 
       <div className="flex gap-x-4 items-center">
-        <FireIcon classProps={`cursor-pointer duration-500 text-cust-light ${showMenu && "rotate-[360deg]"}`} />
+        <AppIcon classProps={`cursor-pointer duration-500 text-cust-light ${showMenu && "rotate-[360deg]"}`} />
 
         <h1
           className={`text-cust-light origin-left font-medium text-xl duration-300 font-mono
