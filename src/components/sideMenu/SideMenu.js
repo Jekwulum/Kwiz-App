@@ -30,7 +30,7 @@ const SideMenu = () => {
         <h1
           className={`text-cust-light origin-left font-medium text-xl duration-300 font-mono
           ${!showMenu && 'scale-0'}`}>
-          Charlie
+          Kwiz
         </h1>
       </div>
       <ul className="pt-6">
