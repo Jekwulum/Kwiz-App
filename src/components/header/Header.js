@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <div className='flex justify-end text-cust-light items-center px-4 h-14 bg-cust-green dark:bg-cust-dark-nav'>
+    <div className='flex justify-end text-cust-light items-center px-4 h-14 bg-light-bg dark:bg-cust-dark-nav'>
 
       <div onClick={() => toggleMode()}
         className='border-none hover:cursor-pointer hover:bg-cust-light/25 rounded-full'>
