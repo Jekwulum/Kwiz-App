@@ -1,0 +1,9 @@
+export const Loading = {
+  FETCHING: 'FETCHING',
+  SUCCESS: 'SUCCESS',
+  CREATED: 'CREATED',
+  ERROR: 'ERROR',
+  FAILED: 'FAILED',
+  OK: 200,
+  NOCONTENT: 204
+}
