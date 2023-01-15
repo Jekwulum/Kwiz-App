@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { configs } from '../helpers/constants';
+import cacheHelper from '../helpers/cacheHelper';
 import cookieHelper from '../helpers/cookieHelper';
 import tokenHelper from '../helpers/tokenHelper';
 
@@ -18,5 +19,9 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(response => response, error => {
     const token = tokenHelper.getToken();
-    if (error.response.status === 401 && token) {}
+    if (error.response.status === 401 && token) {
+        cookieHelper.remove(configs.KEY);
+        cacheHelper.clear();
+        window.location.href = '/login';
+    } else return error.response;
 });
