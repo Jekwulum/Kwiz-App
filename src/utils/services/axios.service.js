@@ -8,13 +8,13 @@ const BASE_URL = "http://localhose:4000";
 
 export const instance = axios.create({ baseURL: BASE_URL });
 
-instance.interceptors.request.use(config => {
+instance.interceptors.request.use((request) => {
     const token = tokenHelper.getToken();
-    const headers = { ...config.headers, 'Content-Type': 'application/json', Authorization: `JWT ${token}` }
+    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
 
-    if (tokenHelper.checkIfLoggedIn()) config.headers = headers;
-    else config.headers = { ...config.headers, 'Content-Type': 'application/json' };
-    return config;
+    if (tokenHelper.checkIfLoggedIn()) request.headers = headers;
+    else request.headers = { 'Content-Type': 'application/json' };
+    return request;
 }, error => Promise.reject(error));
 
 instance.interceptors.response.use(response => response, error => {
