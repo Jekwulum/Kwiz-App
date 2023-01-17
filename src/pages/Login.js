@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LoginPhoto from '../assets/images/login.svg';
 
+
 const Login = () => {
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePasswordField = type => {
+    setPasswordType(type);
+    document.getElementById('password').type = type;
+  };
+
   return (
     <div className='flex md:flex-row items-center justify-center mx-auto h-screen space-x-6'>
 
@@ -15,7 +23,16 @@ const Login = () => {
 
           <input placeholder='email' type='email' className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
 
-          <input placeholder='password' type='password' className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
+          <div>
+            <input placeholder='password' type={passwordType} className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
+            <div className='eye-right relative left-60 bottom-10 text-light-bg'>
+              {
+                passwordType === "password" ?
+                  <i onClick={() => togglePasswordField('text')} className='uil uil-eye'></i> :
+                  <i onClick={() => togglePasswordField('password')} className='uil uil-eye-slash'></i>
+              }
+            </div>
+          </div>
 
           <div className='flex space-x-10 text-xs text-light-bg m-2 items-center text-center'>
 
@@ -25,7 +42,7 @@ const Login = () => {
             </span>
 
             <a href='#' className='underline'>Forgot Password?</a>
-            
+
           </div>
 
           <button type='submit' className='w-64 h-10 m-2 mt-4 rounded-full text-sm text-cust-light bg-light-bg'>Login</button>
