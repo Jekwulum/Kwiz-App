@@ -6,6 +6,7 @@ import Analytics from './pages/Analytics';
 import Dashboard from "./pages/Dashboard";
 import Files from './pages/Files';
 import Inbox from "./pages/Inbox";
+import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import Search from './pages/Search';
 import Settings from './pages/Settings';
@@ -14,6 +15,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route exact path='/login' element={<Login />} />
         {["/", "/dashboard", "/home"].map(path => <Route path={path} element={<Dashboard />} />)}
         <Route exact path='/accounts' element={<Accounts />} />
         <Route exact path='/analytics' element={<Analytics />} />
