@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import profilePicture from '../../assets/images/profile-pic.svg';
 
 const MoonIcon = () => (
