@@ -1,6 +1,10 @@
 import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import profilePicture from '../../assets/images/profile-pic.svg';
 import AuthService from '../../utils/services/auth.service';
+import cookieHelper from '../../utils/helpers/cookieHelper';
+import cacheHelper from '../../utils/helpers/cacheHelper';
+import { configs } from '../../utils/helpers/constants';
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 p-1 text-cust-light">
@@ -15,9 +19,21 @@ const SignOutIcon = () => (
 
 );
 
-const removeLoggedInUser = async () => {};
-
 const Header = () => {
+  const navigate = useNavigate();
+
+  const removeLoggedInUser = async () => {
+    AuthService.logout();
+    cookieHelper.remove(configs.KEY);
+    cacheHelper.remove(configs.KEY);
+    cacheHelper.clear();
+    navigate('/login');
+  };
+
+  const logoutUser = async (event) => {
+    event.preventDefault();
+    await removeLoggedInUser();
+  };
 
   const toggleMode = () => {
     const element = document.querySelector('html').className;
@@ -32,9 +48,10 @@ const Header = () => {
         <MoonIcon />
       </div>
 
-      <div className='border-none hover:cursor-pointer hover:bg-cust-light/25 rounded-full'>
+      <NavLink onClick={logoutUser}
+        className='border-none hover:cursor-pointer hover:bg-cust-light/25 rounded-full'>
         <SignOutIcon />
-      </div>
+      </NavLink>
 
       <img className='h-12 w-12 border-none p-1 hover:cursor-pointer hover:bg-cust-light/25 rounded-full' src={profilePicture} alt="" />
 

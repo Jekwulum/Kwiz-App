@@ -8,9 +8,10 @@ const encryptHelper = {
     },
 
     decrypt: data => {
+        console.log("here x7");
         if (!data) return null;
         else {
-            const bytes = Crypto.AES.decrypt(data.toString(), configs.KEY);
+            const bytes = CryptoJs.AES.decrypt(data.toString(), configs.KEY);
             return JSON.parse(bytes.toString(CryptoJs.enc.Utf8));
         }
     },

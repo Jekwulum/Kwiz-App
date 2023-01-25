@@ -10,7 +10,7 @@ export const instance = axios.create({ baseURL: BASE_URL });
 
 instance.interceptors.request.use((request) => {
     const token = tokenHelper.getToken();
-    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
+    const headers = { 'Content-Type': 'application/json', 'authorization': `Bearer ${token}` }
 
     if (tokenHelper.checkIfLoggedIn()) request.headers = headers;
     else request.headers = { 'Content-Type': 'application/json' };

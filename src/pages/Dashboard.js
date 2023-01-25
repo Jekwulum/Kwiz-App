@@ -4,7 +4,15 @@ import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import SideMenu from '../components/sideMenu/SideMenu';
 
+import { configs } from '../utils/helpers/constants';
+import cookieHelper from '../utils/helpers/cookieHelper';
+import cacheHelper from '../utils/helpers/cacheHelper';
+
+
 const Dashboard = () => {
+  // cookieHelper.remove(configs.KEY);
+  // cacheHelper.remove(configs.KEY);
+  // cacheHelper.clear();
   return (
     <div className='flex'>
       <SideMenu />
