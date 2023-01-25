@@ -10,9 +10,6 @@ import cacheHelper from '../utils/helpers/cacheHelper';
 
 
 const Dashboard = () => {
-  // cookieHelper.remove(configs.KEY);
-  // cacheHelper.remove(configs.KEY);
-  // cacheHelper.clear();
   return (
     <div className='flex'>
       <SideMenu />
