@@ -7,6 +7,13 @@ const AuthService = {
             url: '/auth/login',
             data: payload
         })
+    },
+
+    logout(){
+        return Axios({
+            method: 'POST',
+            url: '/auth/logout',
+        });
     }
 };
 

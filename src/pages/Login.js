@@ -48,7 +48,6 @@ const Login = () => {
   };
 
   const setLoggedInUser = async (token, user) => {
-    console.log("here 4");
     tokenHelper.saveToken(token);
     tokenHelper.saveUserId(user.userId);
   };
