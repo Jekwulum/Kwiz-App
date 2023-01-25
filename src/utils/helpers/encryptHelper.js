@@ -4,7 +4,7 @@ import { configs } from './constants';
 const encryptHelper = {
     encrypt: data => {
         if (!data) return null;
-        else return CryptoJs.AES.encrypt(JSON.stringify(data, configs.KEY));
+        else return CryptoJs.AES.encrypt(JSON.stringify(data), configs.KEY);
     },
 
     decrypt: data => {

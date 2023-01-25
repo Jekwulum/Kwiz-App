@@ -45,11 +45,12 @@ const Login = () => {
       setLoginErrorStatus(false);
       setLoadingStatus(false);
     }
-  };;
+  };
 
   const setLoggedInUser = async (token, user) => {
-    await tokenHelper.saveToken(token);
-    await tokenHelper.saveUserId(user.userId)
+    console.log("here 4");
+    tokenHelper.saveToken(token);
+    tokenHelper.saveUserId(user.userId);
   };
 
   return (
@@ -98,7 +99,7 @@ const Login = () => {
 
           <button type='submit' onClick={handleLogin} disabled={ifValidated}
             className='w-64 h-10 m-2 mt-4 rounded-full text-sm text-cust-light bg-light-bg'>
-              Login {loading ? <>&nbsp;<i className="uil uil-spinner"></i></> : ""}</button>
+            Login {loading ? <>&nbsp;<i className="uil uil-spinner"></i></> : ""}</button>
         </div>
       </div>
 
