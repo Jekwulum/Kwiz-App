@@ -4,6 +4,11 @@ import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import SideMenu from '../components/sideMenu/SideMenu';
 
+import { configs } from '../utils/helpers/constants';
+import cookieHelper from '../utils/helpers/cookieHelper';
+import cacheHelper from '../utils/helpers/cacheHelper';
+
+
 const Dashboard = () => {
   return (
     <div className='flex'>

@@ -18,7 +18,7 @@ const SideMenu = () => {
     { title: "Settings", icon: <SettingsIcon /> },
   ];
   return (
-    <div className={`${showMenu ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-light-bg dark:bg-cust-dark-nav relative`}>
+    <div className={`${showMenu ? "w-72 z-50" : "w-20"} duration-300 h-screen p-5 pt-8 bg-light-bg dark:bg-cust-dark-nav relative`}>
 
       <ArrowCircleIcon showMenu={showMenu} setShowMenu={setShowMenu}
         classProps={`absolute cursor-pointer bg-cust-light text-light-bg dark:bg-cust-dark-body dark:text-cust-light`}

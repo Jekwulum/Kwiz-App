@@ -4,13 +4,14 @@ import { configs } from './constants';
 const encryptHelper = {
     encrypt: data => {
         if (!data) return null;
-        else return CryptoJs.AES.encrypt(JSON.stringify(data, configs.KEY));
+        else return CryptoJs.AES.encrypt(JSON.stringify(data), configs.KEY);
     },
 
     decrypt: data => {
+        console.log("here x7");
         if (!data) return null;
         else {
-            const bytes = Crypto.AES.decrypt(data.toString(), configs.KEY);
+            const bytes = CryptoJs.AES.decrypt(data.toString(), configs.KEY);
             return JSON.parse(bytes.toString(CryptoJs.enc.Utf8));
         }
     },

@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import profilePicture from '../../assets/images/profile-pic.svg';
+import AuthService from '../../utils/services/auth.service';
+import cookieHelper from '../../utils/helpers/cookieHelper';
+import cacheHelper from '../../utils/helpers/cacheHelper';
+import { configs } from '../../utils/helpers/constants';
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 p-1 text-cust-light">
@@ -7,7 +12,28 @@ const MoonIcon = () => (
   </svg>
 );
 
+const SignOutIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 p-1 text-cust-light">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+  </svg>
+
+);
+
 const Header = () => {
+  const navigate = useNavigate();
+
+  const removeLoggedInUser = async () => {
+    AuthService.logout();
+    cookieHelper.remove(configs.KEY);
+    cacheHelper.remove(configs.KEY);
+    cacheHelper.clear();
+    navigate('/login');
+  };
+
+  const logoutUser = async (event) => {
+    event.preventDefault();
+    await removeLoggedInUser();
+  };
 
   const toggleMode = () => {
     const element = document.querySelector('html').className;
@@ -21,6 +47,11 @@ const Header = () => {
         className='border-none hover:cursor-pointer hover:bg-cust-light/25 rounded-full'>
         <MoonIcon />
       </div>
+
+      <NavLink onClick={logoutUser}
+        className='border-none hover:cursor-pointer hover:bg-cust-light/25 rounded-full'>
+        <SignOutIcon />
+      </NavLink>
 
       <img className='h-12 w-12 border-none p-1 hover:cursor-pointer hover:bg-cust-light/25 rounded-full' src={profilePicture} alt="" />
 

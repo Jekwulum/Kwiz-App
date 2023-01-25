@@ -4,13 +4,13 @@ import cacheHelper from '../helpers/cacheHelper';
 import cookieHelper from '../helpers/cookieHelper';
 import tokenHelper from '../helpers/tokenHelper';
 
-const BASE_URL = "http://localhose:4000";
+const BASE_URL = "http://localhost:4000";
 
 export const instance = axios.create({ baseURL: BASE_URL });
 
 instance.interceptors.request.use((request) => {
     const token = tokenHelper.getToken();
-    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
+    const headers = { 'Content-Type': 'application/json', 'authorization': `Bearer ${token}` }
 
     if (tokenHelper.checkIfLoggedIn()) request.headers = headers;
     else request.headers = { 'Content-Type': 'application/json' };
