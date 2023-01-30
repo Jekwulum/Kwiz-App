@@ -5,6 +5,7 @@ import Accounts from './pages/Accounts';
 import Analytics from './pages/Analytics';
 import Dashboard from "./pages/Dashboard";
 import Files from './pages/Files';
+import Home from './pages/Home';
 import Inbox from "./pages/Inbox";
 import Login from './pages/Login';
 import Schedule from './pages/Schedule';
@@ -16,7 +17,8 @@ function App() {
     <Router>
       <Routes>
         <Route exact path='/login' element={<Login />} />
-        {/* {["/", "/dashboard", "/home"].map(path => <Route path={path} element={<Dashboard />} />)} */}
+        {["/", "/home"].map(path => <Route path={path} element={<Home />} />)}
+        {["/dashboard"].map(path => <Route path={path} element={<Dashboard />} />)}
         {/* implement secure routes and dashboard and home page */}
         <Route exact path='/accounts' element={<Accounts />} />
         <Route exact path='/analytics' element={<Analytics />} />
