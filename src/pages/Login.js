@@ -100,7 +100,7 @@ const Login = () => {
             className='w-64 h-10 m-2 mt-4 rounded-full text-sm text-cust-light bg-light-bg'>
             Login {loading ? <>&nbsp;<i class="fa fa-spinner fa-spin mx-1"></i></> : ""}</button>
 
-            <p className='text-xs'>Don't have an account? <a href="/signup" className='text-light-bg'>Sign up here</a></p>
+          <p className='text-xs'>Don't have an account? <a href="/signup" className='text-light-bg'>Sign up here</a></p>
         </div>
       </div>
 
