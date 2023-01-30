@@ -43,7 +43,7 @@ const Home = () => {
 
         {/* mobile nav */}
         {showMenu ?
-          <div className='bg-light-bg text-white w-32 absolute top-[68px] right-3 rounded-b-lg transition duration-300 ease-in'>
+          <div className={`bg-light-bg text-white w-32 absolute top-[68px] right-3 rounded-b-lg transiiton-all duration-300 ease-in-out transform`}>
             <nav className='md:hidden flex flex-col text-left'>
               <NavLink to="/login" className="hover:text-light-bg hover:bg-gray-200 p-1 rounded-b-lg transition duration-300 ease-in m-1">Login</NavLink>
               <NavLink to="/signup" className="hover:text-light-bg hover:bg-gray-200 p-1 rounded-b-lg transition duration-300 ease-in m-1">Sign up</NavLink>
