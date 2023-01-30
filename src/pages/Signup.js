@@ -16,6 +16,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoadingStatus] = useState(false);
+  const [emailValidator, setEmailValidator] = useState(null);
 
   const togglePasswordField = type => {
     setPasswordType(type);
@@ -25,6 +26,16 @@ const Signup = () => {
   const toggleConfirmPasswordField = type => {
     setConfirmPasswordType(type);
     document.getElementById('confirmPassword').type = type;
+  };
+
+  const handleEmailValidator = event => {
+    const pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const email = event.target.value.toLowerCase().replace(/ /g, "");
+    if (!pattern.test(email)) setEmailValidator('Please enter a valid email');
+    else {
+      setEmailValidator(null);
+      setEmail(email);
+    }
   };
 
   return (
@@ -38,8 +49,9 @@ const Signup = () => {
           <p className='text-3xl m-4 text-light-bg'>Create an account</p>
 
           <input placeholder='email' type='email'
-            value={email} onChange={e => setEmail(e.target.value)}
+            value={email} onChange={e => setEmail(e.target.value)} onInput={handleEmailValidator}
             className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
+            {emailValidator ? <small className="text-red-700">{emailValidator}</small> : ''}
 
           <input placeholder='First name' type='text'
             value={firstName} onChange={e => setFirstName(e.target.value)}
