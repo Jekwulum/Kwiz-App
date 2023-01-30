@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path='/login' element={<Login />} />
-        {/* {["/", "/dashboard", "/home"].map(path => <Route path={path} element={<Dashboard />} />)} */}
+        {["/", "/dashboard", "/home"].map(path => <Route path={path} element={<Dashboard />} />)}
         {/* implement secure routes and dashboard and home page */}
         <Route exact path='/accounts' element={<Accounts />} />
         <Route exact path='/analytics' element={<Analytics />} />

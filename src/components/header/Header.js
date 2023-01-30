@@ -5,6 +5,7 @@ import AuthService from '../../utils/services/auth.service';
 import cookieHelper from '../../utils/helpers/cookieHelper';
 import cacheHelper from '../../utils/helpers/cacheHelper';
 import { configs } from '../../utils/helpers/constants';
+import { Loading } from '../../utils/helpers/constants';
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 p-1 text-cust-light">
@@ -23,11 +24,13 @@ const Header = () => {
   const navigate = useNavigate();
 
   const removeLoggedInUser = async () => {
-    AuthService.logout();
-    cookieHelper.remove(configs.KEY);
-    cacheHelper.remove(configs.KEY);
-    cacheHelper.clear();
-    navigate('/login');
+    const { data: responseData } = await AuthService.logout();
+    if (responseData.status === Loading.SUCCESS) {
+      cookieHelper.remove(configs.KEY);
+      cacheHelper.remove(configs.KEY);
+      cacheHelper.clear();
+      navigate('/login');
+    }
   };
 
   const logoutUser = async (event) => {
