@@ -46,6 +46,7 @@ const Signup = () => {
             className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
 
           <input placeholder='Last name' type='text'
+            value={lastName} onChange={e => setLastName(e.target.value)}
             className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
 
           <div>
