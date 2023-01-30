@@ -10,6 +10,8 @@ const Signup = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [confirmPasswordType, setConfirmPasswordType] = useState("password");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -36,6 +38,7 @@ const Signup = () => {
           <p className='text-3xl m-4 text-light-bg'>Create an account</p>
 
           <input placeholder='email' type='email'
+            value={email} onChange={e => setEmail(e.target.value)}
             className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
 
           <input placeholder='First name' type='text'
