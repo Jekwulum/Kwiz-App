@@ -11,12 +11,14 @@ import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import Search from './pages/Search';
 import Settings from './pages/Settings';
+import Signup from './pages/Signup';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route exact path='/login' element={<Login />} />
+        <Route exact path='/signup' element={<Signup />} />
         {["/", "/home"].map(path => <Route path={path} element={<Home />} />)}
         {["/dashboard"].map(path => <Route path={path} element={<Dashboard />} />)}
         {/* implement secure routes and dashboard and home page */}
