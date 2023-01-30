@@ -86,6 +86,7 @@ const Signup = () => {
               }
             </div>
           </div>
+          {password !== confirmPassword ? <small className="text-red-700">Passwords do not match!</small> : ''}
 
           <button type='submit'
             className='w-64 h-10 m-2 mt-4 rounded-full text-sm text-cust-light bg-light-bg'>
