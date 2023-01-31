@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import SignupPhoto from "../assets/images/signup_photo.svg";
-import AuthService from '../utils/services/auth.service';
+import UserService from '../utils/services/user.service';
 import encryptHelper from '../utils/helpers/encryptHelper';
 import tokenHelper from '../utils/helpers/tokenHelper';
 import { Loading } from '../utils/helpers/constants';
