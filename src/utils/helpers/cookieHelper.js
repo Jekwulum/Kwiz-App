@@ -3,7 +3,6 @@ import encryptHelper from './encryptHelper';
 
 const cookieHelper = {
     get: key => {
-        console.log("here x5");
         return encryptHelper.decrypt(Cookies.get(key));
     },
 
