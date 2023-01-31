@@ -31,15 +31,12 @@ function App() {
         {/* Secure routes */}
         <Route exact path='/dashboard' element={<ProtectedRoute Component={Dashboard} />} />
         <Route exact path='/accounts' element={<ProtectedRoute Component={Accounts} />} />
-
-        {/* <IsLoggedInRoute exact path='/accounts' element={<Accounts />} />
-        <IsLoggedInRoute exact path='/analytics' element={<Analytics />} />
-        <IsLoggedInRoute exact path='/files' element={<Files />} />
-        <IsLoggedInRoute exact path='/inbox' element={<Inbox />} />
-        <IsLoggedInRoute exact path='/schedule' element={<Schedule />} />
-        <IsLoggedInRoute exact path='/search' element={<Search />} />
-        <IsLoggedInRoute exact path='/settings' element={<Settings />} /> */}
-
+        <Route exact path='/analytics' element={<ProtectedRoute Component={Analytics} />} />
+        <Route exact path='/files' element={<ProtectedRoute Component={Files} />} />
+        <Route exact path='/inbox' element={<ProtectedRoute Component={Inbox} />} />
+        <Route exact path='/schedule' element={<ProtectedRoute Component={Schedule} />} />
+        <Route exact path='/search' element={<ProtectedRoute Component={Search} />} />
+        <Route exact path='/settings' element={<ProtectedRoute Component={Settings} />} />
       </Routes>
     </Router>
   );
