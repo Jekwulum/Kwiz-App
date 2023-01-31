@@ -17,7 +17,7 @@ const Login = () => {
   const [errorStatus, setLoginErrorStatus] = useState(false);
   const ifValidated = !email || !password;
 
-  if (isLoggedIn) return <Navigate to={{ pathname: "/" }} />;
+  if (isLoggedIn) return <Navigate to={{ pathname: "/dashboard" }} />;
 
   const togglePasswordField = type => {
     setPasswordType(type);

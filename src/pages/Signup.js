@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SignupPhoto from "../assets/images/signup_photo.svg";
 import UserService from '../utils/services/user.service';
-import encryptHelper from '../utils/helpers/encryptHelper';
-import tokenHelper from '../utils/helpers/tokenHelper';
 import { Loading } from '../utils/helpers/constants';
 import { validateEmail } from '../utils/helpers/validators';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [re_passwordType, setRePasswordType] = useState("password");
   const [email, setEmail] = useState("");
@@ -17,6 +16,7 @@ const Signup = () => {
   const [re_password, setRePassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoadingStatus] = useState(false);
+  const [errorStatus, setSignUpErrorStatus] = useState(false);
   const [emailValidator, setEmailValidator] = useState(null);
 
   const isDisabled = !lastName || !firstName || !email || !validateEmail(email) || !password || !re_password || !(re_password === password);
@@ -43,7 +43,15 @@ const Signup = () => {
 
   const handleSignUp = async () => {
     let payload = { firstName, lastName, email, password, re_password };
-    console.log(payload);
+
+    setSignUpErrorStatus(false);
+    setLoadingStatus(true);
+    const { data: responseData } = await UserService.createUser(payload);
+    if (responseData.status !== Loading.SUCCESS) {
+      setSignUpErrorStatus(true);
+      setMessage(responseData.message);
+      setLoadingStatus(false);
+    } else navigate('/login');
   };
 
   return (
@@ -56,6 +64,9 @@ const Signup = () => {
         <div className="flex flex-col justify-center items-center">
           <p className='text-3xl m-4 text-light-bg'>Create an account</p>
 
+          {errorStatus ?
+            <div className='text-red-600 text-lg font-semibold italic bg-red-100 w-64 text-center'>{message}</div> : ""
+          }
           <input placeholder='email' type='email'
             value={email} onChange={e => setEmail(e.target.value)} onInput={handleEmailValidator}
             className='m-2 w-64 h-10 rounded-full text-center focus:outline-none text-sm placeholder-light-bg text-light-bg bg-gray-200' />
