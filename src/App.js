@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
-        {["/", "/home"].map(path => <Route exact path={path} element={<Home/>} />)}
+        {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home/>} key={index} />)}
 
         {/* Secure routes */}
         <Route exact path='/dashboard' element={<ProtectedRoute Component={Dashboard} />} />

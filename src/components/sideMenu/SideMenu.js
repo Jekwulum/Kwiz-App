@@ -35,7 +35,7 @@ const SideMenu = () => {
       </div>
       <ul className="pt-6">
         {Menus.map((menu, index) => (
-          <NavLink to={`/${menu.title.toLowerCase()}`}>
+          <NavLink to={`/${menu.title.toLowerCase()}`} key={index}>
             <li key={index} className={`text-cust-light text-xl flex items-center 
             gap-x-4 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
             ${menu.gap ? "mt-9" : "mt-2"}`}>
