@@ -32,16 +32,26 @@ const Dashboard = () => {
       <SideMenu />
 
       {/* <div> */}
-        <div className='h-screen w-full'>
-          <Header />
-          <div className='p-7 h-5/6 font-semibold flex-1 dark:bg-cust-dark-body dark:text-cust-light'>
-            <h1 className='text-4xl'>Dashboard</h1>
-            <div className=''>
-              <p>Welcome Here</p>
+      <div className='h-screen w-full'>
+        <Header />
+        <div className='p-7 h-5/6 font-semibold flex-1 dark:bg-cust-dark-body dark:text-cust-light'>
+          <h1 className='text-4xl'>Welcome {user.firstName}</h1>
+
+          <div className='mt-8'>
+            <p>What would you like to do today?</p>
+            <div className='flex flex-col mt-3 gap-4 mx-auto'>
+              <button className='bg-light-bg h-10 w-60 rounded-lg text-white p-2 text-xs'>Create Quiz</button>
+              <div className='space-x-2 mx-auto'>
+                <input type="text" placeholder='Enter Quiz Code'
+                  className='h-8 p-4 w-40 border-2 outline-none align-middle text-center text-light-bg' />
+                <button className='bg-light-bg h-10 w-16 rounded-lg text-white p-2 text-xs'>View</button>
+              </div>
             </div>
           </div>
-          <Footer />
+
         </div>
+        <Footer />
+      </div>
       {/* </div> */}
     </div>
   )
