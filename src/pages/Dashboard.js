@@ -7,6 +7,7 @@ import SideMenu from '../components/sideMenu/SideMenu';
 
 import { configs } from '../utils/helpers/constants';
 import { fetchUserById } from '../store/slice/userSlice';
+import { fetchQuestionsByUserId, fetchQuestionsByQuizId } from '../store/slice/quizSlice';
 import { Loading } from '../utils/helpers/constants';
 import { SphereLoader } from '../components/loaders/SphereLoaders';
 import tokenHelper from '../utils/helpers/tokenHelper';
@@ -17,15 +18,19 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { user, loadingUser } = useSelector(state => state.user);
   const userId = tokenHelper.getUserId();
-  console.log(userId);
+
+  const { userQuestions, quizQuestions,
+    loadingUserQuestions, loadingQuizQuestions } = useSelector(state => state.quiz);
 
   useEffect(() => {
     batch(() => {
-      if (loadingUser !== Loading.SUCCESS) dispatch(fetchUserById(userId))
+      if (loadingUser !== Loading.SUCCESS) dispatch(fetchUserById(userId));
+      if (loadingUserQuestions !== Loading.SUCCESS) dispatch(fetchQuestionsByUserId(userId));
     });
   }, [dispatch]);
 
-  console.log("user:::: ", user);
+  console.log(userId);
+  console.log(userQuestions);
 
   return (
     <div className='flex'>
