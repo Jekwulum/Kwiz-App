@@ -64,3 +64,5 @@ export const quizSlice = createSlice({
     })
   }
 });
+
+export default quizSlice.reducer;
