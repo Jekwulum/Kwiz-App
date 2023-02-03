@@ -18,7 +18,7 @@ const SideMenu = () => {
     { title: "Settings", icon: <SettingsIcon /> },
   ];
   return (
-    <div className={`${showMenu ? "w-72 z-50" : "w-20"} duration-300 h-screen p-5 pt-8 bg-light-bg dark:bg-cust-dark-nav relative`}>
+    <div className={`${showMenu ? "w-48 z-50" : "w-12"} duration-300 h-screen p-1 pt-8 bg-light-bg dark:bg-cust-dark-nav relative`}>
 
       <ArrowCircleIcon showMenu={showMenu} setShowMenu={setShowMenu}
         classProps={`absolute cursor-pointer bg-cust-light text-light-bg dark:bg-cust-dark-body dark:text-cust-light`}
@@ -35,7 +35,7 @@ const SideMenu = () => {
       </div>
       <ul className="pt-6">
         {Menus.map((menu, index) => (
-          <NavLink to={`/${menu.title.toLowerCase()}`}>
+          <NavLink to={`/${menu.title.toLowerCase()}`} key={index}>
             <li key={index} className={`text-cust-light text-xl flex items-center 
             gap-x-4 cursor-pointer p-1.5 hover:bg-cust-light/25 hover:rounded-md
             ${menu.gap ? "mt-9" : "mt-2"}`}>

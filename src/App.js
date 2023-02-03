@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import tokenHelper from './utils/helpers/tokenHelper';
 
 import Accounts from './pages/Accounts';
 import Analytics from './pages/Analytics';
@@ -14,21 +15,28 @@ import Settings from './pages/Settings';
 import Signup from './pages/Signup';
 
 function App() {
+
+  const ProtectedRoute = ({ Component }) => {
+    if (tokenHelper.checkIfLoggedIn()) return <Component />
+    return <Navigate to='/login' />
+  }
+
   return (
     <Router>
       <Routes>
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
-        {["/", "/home"].map(path => <Route path={path} element={<Home />} />)}
-        {["/dashboard"].map(path => <Route path={path} element={<Dashboard />} />)}
-        {/* implement secure routes and dashboard and home page */}
-        <Route exact path='/accounts' element={<Accounts />} />
-        <Route exact path='/analytics' element={<Analytics />} />
-        <Route exact path='/files' element={<Files />} />
-        <Route exact path='/inbox' element={<Inbox />} />
-        <Route exact path='/schedule' element={<Schedule />} />
-        <Route exact path='/search' element={<Search />} />
-        <Route exact path='/settings' element={<Settings />} />
+        {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home/>} key={index} />)}
+
+        {/* Secure routes */}
+        <Route exact path='/dashboard' element={<ProtectedRoute Component={Dashboard} />} />
+        <Route exact path='/accounts' element={<ProtectedRoute Component={Accounts} />} />
+        <Route exact path='/analytics' element={<ProtectedRoute Component={Analytics} />} />
+        <Route exact path='/files' element={<ProtectedRoute Component={Files} />} />
+        <Route exact path='/inbox' element={<ProtectedRoute Component={Inbox} />} />
+        <Route exact path='/schedule' element={<ProtectedRoute Component={Schedule} />} />
+        <Route exact path='/search' element={<ProtectedRoute Component={Search} />} />
+        <Route exact path='/settings' element={<ProtectedRoute Component={Settings} />} />
       </Routes>
     </Router>
   );

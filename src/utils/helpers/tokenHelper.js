@@ -17,7 +17,6 @@ const tokenHelper = {
     },
 
     getToken() {
-        console.log("here x4")
         return cookieHelper.get(configs.KEY);
     },
 
