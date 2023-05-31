@@ -30,7 +30,7 @@ const Home = () => {
     <div className=''>
 
       <div className='flex justify-between my-6 mx-3'>
-        <p className='text-5xl font-bold text-light-bg'>Kwiz</p>
+        <NavLink className='text-5xl font-bold text-light-bg'>Kwiz</NavLink>
         <nav className='hidden md:flex gap-2 my-auto '>
           <NavLink to="/login" className="hover:text-light-bg hover:bg-gray-200 rounded-full p-2 transition duration-300 ease-in">Login</NavLink>
           <NavLink to="/signup" className="hover:text-light-bg hover:bg-gray-200 rounded-full p-2 transition duration-300 ease-in">Sign up</NavLink>
