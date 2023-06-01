@@ -58,7 +58,7 @@ const Login = () => {
       <div className='flex md:flex-row items-center justify-center mx-auto space-x-6'>
 
         <div className='hidden md:block'>
-          <img src={LoginPhoto} alt='Login Photo' className="h-96 w-64" />
+          <img src={LoginPhoto} alt='Login' className="h-96 w-64" />
         </div>
 
         <div className=''>

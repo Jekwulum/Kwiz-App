@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Loading } from '../utils/helpers/constants';
+import QuizService from '../utils/services/quiz.service';
 import HomePhoto from '../assets/images/home_photo.svg';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const [quizID, setQuizID] = useState("");
+  const [errorResponse, setErrorResponse] = useState(false);
 
   const toggleMenu = (event) => {
     event.preventDefault();
@@ -25,6 +30,18 @@ const Home = () => {
       </div>
 
   );
+
+  const loadQuizPage = (event) => {
+    event.preventDefault();
+
+    QuizService.getQuestionsByQuizId(quizID)
+      .then(({ data: responseData }) => {
+        if (responseData.status !== Loading.SUCCESS) {
+          setErrorResponse(true);
+        }
+        else navigate('/quiz-page', { state: responseData.data });
+      });
+  };
 
   return (
     <div className=''>
@@ -53,9 +70,10 @@ const Home = () => {
       </div>
 
       <div className='h-32 mx-auto text-center'>
-        <input type="text" placeholder='Enter Quiz Code'
-          className='w-3/6 md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-bg' />
-        <button className='bg-light-bg h-11 w-11 mt-2 rounded-full text-white font-bold text-lg'>Go</button>
+        <input type="text" placeholder='Enter Quiz Code' onChange={e => setQuizID(e.target.value)} value={quizID}
+          className={`w-3/6 md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-b ${errorResponse ? "border-red-500" : ""}`} />
+        <button onClick={loadQuizPage} className='bg-light-bg h-11 w-11 mt-2 rounded-full text-white font-bold text-lg'>Go</button>
+        {errorResponse ? <p className='text-red-500 text-sm'>Invalid quiz code!</p> : ""}
       </div>
 
       <div className='flex text-center items-center mx-auto'>

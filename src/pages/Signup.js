@@ -59,7 +59,7 @@ const Signup = () => {
       <NavLink to="/" className='text-5xl font-bold text-light-bg'>Kwiz</NavLink>
       <div className='flex md:flex-row items-center justify-center mx-auto space-x-6'>
       <div className='hidden md:block'>
-        <img src={SignupPhoto} alt='Login Photo' className="h-96 w-64" />
+        <img src={SignupPhoto} alt='Login' className="h-96 w-64" />
       </div>
 
       <div>
