@@ -27,12 +27,7 @@ const QuizPage = () => {
 
   const handleNextQuestion = () => dispatch(goToNextQuestion());
   const handlePrevQuestion = () => dispatch(goToPrevQuestion());
-  const handleAnswer = (questionId, answer) => {
-    // console.log("questionId: ", questionId);
-    console.log("answer: ", answer);
-    console.log("cuurent Q Index: ", currentQuestionIndex);
-    dispatch(savePlayerAnswer({ questionId, answer }))
-  };
+  const handleAnswer = (questionId, answer) => dispatch(savePlayerAnswer({ questionId, answer }));
 
   const verifyPlayerID = (event) => {
     event.preventDefault();
@@ -61,11 +56,11 @@ const QuizPage = () => {
   console.log("answers: ", playerAnswers);
   return (
     <div>
-      <div className='my-6 mx-3'>
-        <NavLink className='text-5xl font-bold text-light-bg'>Kwiz</NavLink>
+      <div className='my-3 md:my-6 mx-3'>
+        <NavLink className='text-4xl md:text-5xl font-bold text-light-bg'>Kwiz</NavLink>
       </div>
 
-      <div className='mx-auto text-center my-4 w-full'>
+      <div className='mx-auto text-center my-2 md:my-4 w-full'>
         <div className="flex justify-center items-center">
           <input type="text" placeholder='Enter player ID' onChange={e => setPlayerId(e.target.value)} value={playerID}
             className={`md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-bg ${playerIDTaken ? "border-red-500" : ""}`} />
@@ -77,34 +72,39 @@ const QuizPage = () => {
         {/* {showTickIcon ?  <p className='text-green-500 text-sm' >Player ID available</p> : ""} */}
       </div>
 
-      <div className='bg-gray-300 w-full p-2'>
-        {currentQuestion && (
-          <div>
-            <h3 className='text-center text-lg text-light-bg italic'>Question-{currentQuestionIndex + 1}/{questions.length}</h3>
-            <h3 className='text-center my-2 text-lg text-light-bg font-bold'>{currentQuestion.question}</h3>
-            <ul className='list-none p-0 space-y-2 my-2'>
-              {currentQuestion.options.map((option, optionIndex) => (
-                <li key={optionIndex} className='flex items-center justify-center'>
-                  <label className={`w-3/5 md:w-2/5 py-2 px-4 border text-white bg-light-bg rounded-lg cursor-pointer hover:bg-gray-100 hover:text-light-bg ${playerAnswers[currentQuestionIndex] === optionIndex ? 'bg-cyan-600' : ''}`}>
-                    <input type="radio" name={"options"} value={optionIndex}
-                      checked={playerAnswers[currentQuestionIndex] === optionIndex}
-                      onChange={() => handleAnswer(currentQuestionIndex, optionIndex)}
-                      className='hidden' />
-                    {option}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      {showTickIcon ?
+        <div className='bg-gray-300 w-full p-2'>
+          {currentQuestion && (
+            <div>
+              <h3 className='text-center text-lg text-light-bg italic'>Question-{currentQuestionIndex + 1}/{questions.length}</h3>
+              <h3 className='text-center my-2 text-lg text-light-bg font-bold'>{currentQuestion.question}</h3>
+              <ul className='list-none p-0 space-y-2 my-2'>
+                {currentQuestion.options.map((option, optionIndex) => (
+                  <li key={optionIndex} className='flex items-center justify-center'>
+                    <label className={`w-3/5 md:w-2/5 py-2 px-4 border text-white bg-light-bg rounded-lg cursor-pointer hover:bg-gray-100 hover:text-light-bg ${playerAnswers[currentQuestionIndex] === optionIndex ? 'bg-cyan-600' : ''}`}>
+                      <input type="radio" name={"options"} value={optionIndex}
+                        checked={playerAnswers[currentQuestionIndex] === optionIndex}
+                        onChange={() => handleAnswer(currentQuestionIndex, optionIndex)}
+                        className='hidden' />
+                      {option}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        <div className="flex justify-between items-center">
-          <button onClick={handlePrevQuestion} disabled={currentQuestionIndex === 0}
-            className={`h-9 w-24 m-2 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-white ${currentQuestionIndex === 0 ? 'bg-light-bg/[0.7]' : 'bg-light-bg'}`}>Previous</button>
-          <button onClick={handleNextQuestion} disabled={currentQuestionIndex === questions.length - 1}
-            className={`h-9 w-24 m-2 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-white ${currentQuestionIndex === questions.length - 1 ? 'bg-light-bg/[0.7]' : 'bg-light-bg'}`}>Next</button>
-        </div>
-      </div>
+          <div className="flex justify-between items-center px-4">
+            <button onClick={handlePrevQuestion} disabled={currentQuestionIndex === 0}
+              className={`h-9 w-24 m-2 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-white ${currentQuestionIndex === 0 ? 'bg-light-bg/[0.7]' : 'bg-light-bg'}`}>Previous</button>
+            <button onClick={handleNextQuestion} disabled={currentQuestionIndex === questions.length - 1}
+              className={`h-9 w-24 m-2 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-white ${currentQuestionIndex === questions.length - 1 ? 'bg-light-bg/[0.7]' : 'bg-light-bg'}`}>Next</button>
+          </div>
+
+          <div className="flex justify-center items-center">
+            <button className='mx-auto h-9 w-40 rounded-sm text-white font-bold text-lg bg-light-bg m-2 hover:text-light-bg hover:bg-white'>Submit</button>
+          </div>
+        </div> : <SphereLoader />}
     </div>
   )
 }
