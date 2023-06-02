@@ -20,9 +20,22 @@ export const fetchQuestionByCode = createAsyncThunk('quiz/fetchQuestionByCode', 
 export const quizSlice = createSlice({
   name: 'quiz',
   initialState: {
-    question: {}, userQuestions: {}, quizQuestions: {},
+    questions: [], currentQuestionIndex: 0,
+    playerAnswers: {},
+    
+    question: {}, userQuestions: [], 
     loadingQuestion: "", loadingUserQuestions: "", loadingQuizQuestions: "",
     questionError: null, userQuestionsError: null, quizQuestionsError: null
+  },
+
+  reducers: {
+    // setQuestions: (state, action) => state.questions = action.payload,
+    goToNextQuestion: (state) => state.currentQuestionIndex += 1,
+    goToPrevQuestion: (state) => state.currentQuestionIndex -= 1,
+    savePlayerAnswer: (state, action) => {
+      const { questionId, answer } = action.payload;
+      state.playerAnswers[questionId] = answer;
+    }
   },
 
   extraReducers(builder) {
@@ -44,7 +57,7 @@ export const quizSlice = createSlice({
     })
     .addCase(fetchQuestionsByQuizId.fulfilled, (state, action) => {
       state.loadingQuizQuestions = Loading.SUCCESS
-      state.quizQuestions = action.payload
+      state.questions = action.payload
     })
     .addCase(fetchQuestionsByQuizId.rejected, (state, action) => {
       state.loadingQuizQuestions = Loading.FAILED
@@ -64,5 +77,7 @@ export const quizSlice = createSlice({
     })
   }
 });
+
+export const { savePlayerAnswer, goToNextQuestion, goToPrevQuestion } = quizSlice.actions;
 
 export default quizSlice.reducer;

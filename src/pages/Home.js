@@ -39,7 +39,7 @@ const Home = () => {
         if (responseData.status !== Loading.SUCCESS) {
           setErrorResponse(true);
         }
-        else navigate('/quiz-page', { state: responseData.data });
+        else navigate('/quiz-page', { state: quizID });
       });
   };
 
@@ -71,7 +71,7 @@ const Home = () => {
 
       <div className='h-32 mx-auto text-center'>
         <input type="text" placeholder='Enter Quiz Code' onChange={e => setQuizID(e.target.value)} value={quizID}
-          className={`w-3/6 md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-b ${errorResponse ? "border-red-500" : ""}`} />
+          className={`w-3/6 md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-bg ${errorResponse ? "border-red-500" : ""}`} />
         <button onClick={loadQuizPage} className='bg-light-bg h-11 w-11 mt-2 rounded-full text-white font-bold text-lg'>Go</button>
         {errorResponse ? <p className='text-red-500 text-sm'>Invalid quiz code!</p> : ""}
       </div>
