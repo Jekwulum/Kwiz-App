@@ -22,16 +22,16 @@ export const quizSlice = createSlice({
   initialState: {
     questions: [], currentQuestionIndex: 0,
     playerAnswers: {},
-    
-    question: {}, userQuestions: [], 
+
+    question: {}, userQuestions: [],
     loadingQuestion: "", loadingUserQuestions: "", loadingQuizQuestions: "",
     questionError: null, userQuestionsError: null, quizQuestionsError: null
   },
 
   reducers: {
     // setQuestions: (state, action) => state.questions = action.payload,
-    goToNextQuestion: (state) => state.currentQuestionIndex += 1,
-    goToPrevQuestion: (state) => state.currentQuestionIndex -= 1,
+    goToNextQuestion: (state) => { state.currentQuestionIndex += 1 },
+    goToPrevQuestion: (state) => { state.currentQuestionIndex -= 1 },
     savePlayerAnswer: (state, action) => {
       const { questionId, answer } = action.payload;
       state.playerAnswers[questionId] = answer;
@@ -40,41 +40,41 @@ export const quizSlice = createSlice({
 
   extraReducers(builder) {
     builder
-    .addCase(fetchQuestionByCode.pending, (state, action) => {
-      state.loadingQuestion = Loading.FETCHING
-    })
-    .addCase(fetchQuestionByCode.fulfilled, (state, action) => {
-      state.loadingQuestion = Loading.SUCCESS
-      state.question = action.payload
-    })
-    .addCase(fetchQuestionByCode.rejected, (state, action) => {
-      state.loadingQuestion = Loading.FAILED
-      state.questionError = action.error.message
-    })
+      .addCase(fetchQuestionByCode.pending, (state, action) => {
+        state.loadingQuestion = Loading.FETCHING
+      })
+      .addCase(fetchQuestionByCode.fulfilled, (state, action) => {
+        state.loadingQuestion = Loading.SUCCESS
+        state.question = action.payload
+      })
+      .addCase(fetchQuestionByCode.rejected, (state, action) => {
+        state.loadingQuestion = Loading.FAILED
+        state.questionError = action.error.message
+      })
 
-    .addCase(fetchQuestionsByQuizId.pending, (state, action) => {
-      state.loadingQuizQuestions = Loading.FETCHING
-    })
-    .addCase(fetchQuestionsByQuizId.fulfilled, (state, action) => {
-      state.loadingQuizQuestions = Loading.SUCCESS
-      state.questions = action.payload
-    })
-    .addCase(fetchQuestionsByQuizId.rejected, (state, action) => {
-      state.loadingQuizQuestions = Loading.FAILED
-      state.quizQuestionsError = action.error.message
-    })
+      .addCase(fetchQuestionsByQuizId.pending, (state, action) => {
+        state.loadingQuizQuestions = Loading.FETCHING
+      })
+      .addCase(fetchQuestionsByQuizId.fulfilled, (state, action) => {
+        state.loadingQuizQuestions = Loading.SUCCESS
+        state.questions = action.payload
+      })
+      .addCase(fetchQuestionsByQuizId.rejected, (state, action) => {
+        state.loadingQuizQuestions = Loading.FAILED
+        state.quizQuestionsError = action.error.message
+      })
 
-    .addCase(fetchQuestionsByUserId.pending, (state, action) => {
-      state.loadingUserQuestions = Loading.FETCHING
-    })
-    .addCase(fetchQuestionsByUserId.fulfilled, (state, action) => {
-      state.loadingUserQuestions = Loading.SUCCESS
-      state.userQuestions = action.payload
-    })
-    .addCase(fetchQuestionsByUserId.rejected, (state, action) => {
-      state.loadingUserQuestions = Loading.FAILED
-      state.userQuestionsError = action.error.message
-    })
+      .addCase(fetchQuestionsByUserId.pending, (state, action) => {
+        state.loadingUserQuestions = Loading.FETCHING
+      })
+      .addCase(fetchQuestionsByUserId.fulfilled, (state, action) => {
+        state.loadingUserQuestions = Loading.SUCCESS
+        state.userQuestions = action.payload
+      })
+      .addCase(fetchQuestionsByUserId.rejected, (state, action) => {
+        state.loadingUserQuestions = Loading.FAILED
+        state.userQuestionsError = action.error.message
+      })
   }
 });
 
