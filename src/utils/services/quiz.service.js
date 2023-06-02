@@ -27,6 +27,22 @@ const QuizService = {
 			method: 'GET',
 			url: `/quiz/player/${quizId}/${playerId}`
 		})
+	},
+
+	addPlayer(quizId, payload) {
+		return Axios({
+			method: 'POST',
+			url: `/quiz/player/${quizId}`,
+			data: payload
+		})
+	},
+
+	updatePlayerScore(quizId, playerId, payload) {
+		return Axios({
+			method: 'PATCH',
+			url: `quiz/player/update-score/${playerId}/${quizId}`,
+			data: payload
+		})
 	}
 };
 

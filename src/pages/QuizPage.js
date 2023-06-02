@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { batch, useDispatch, useSelector } from 'react-redux';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import {
   fetchQuestionsByQuizId,
   goToNextQuestion,
@@ -15,6 +15,7 @@ import { GoodTickIcon } from '../components/svgIcons/SVGIcons';
 const QuizPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const quizId = location.state;
   const [playerID, setPlayerId] = useState("");
   const [playerIDTaken, setPlayerIDTaken] = useState(false);
@@ -35,8 +36,13 @@ const QuizPage = () => {
       QuizService.getPlayerByQuizIDAndPlayerID(quizId, playerID)
         .then(response => {
           if (response.status === 404) {
-            setPlayerIDTaken(false);
-            setShowTickIcon(true);
+            QuizService.addPlayer(quizId, { playerId: playerID })
+              .then(response => {
+                if (response.status === 201) {
+                  setPlayerIDTaken(false);
+                  setShowTickIcon(true);
+                }
+              })
           }
           else {
             setPlayerIDTaken(true);
@@ -46,34 +52,66 @@ const QuizPage = () => {
     }
   };
 
+  const calculatePoints = () => {
+    const questionsCount = questions.length;
+    let score = 0;
+    let total = 0;
+
+    for (let idx = 0; idx < questionsCount; idx++) {
+      const answer_idx = playerAnswers[idx];
+      const user_answer = questions[idx].options[answer_idx];
+      total += questions[idx].points;
+
+      if (user_answer === questions[idx].answer) {
+        score += questions[idx].points;
+      }
+    }
+
+    return [score, total];
+  };
+
+  const submitAnswers = (event) => {
+    event.preventDefault();
+    const [score, total] = calculatePoints();
+    const payload = { score };
+    QuizService.updatePlayerScore(quizId, playerID, payload)
+      .then(response => {
+        if (response.status === 200) {
+          navigate('/results', { state: { score, total } });
+        }
+        else {
+        }
+      })
+  };
+
   useEffect(() => {
     batch(() => {
       if (loadingQuizQuestions !== Loading.SUCCESS) dispatch(fetchQuestionsByQuizId(quizId));
     })
   }, [dispatch, loadingQuizQuestions]);
 
-
-  console.log("answers: ", playerAnswers);
   return (
     <div>
-      <div className='my-3 md:my-6 mx-3'>
-        <NavLink className='text-4xl md:text-5xl font-bold text-light-bg'>Kwiz</NavLink>
-      </div>
-
-      <div className='mx-auto text-center my-2 md:my-4 w-full'>
-        <div className="flex justify-center items-center">
-          <input type="text" placeholder='Enter player ID' onChange={e => setPlayerId(e.target.value)} value={playerID}
-            className={`md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-bg ${playerIDTaken ? "border-red-500" : ""}`} />
-          <button onClick={verifyPlayerID}
-            className='bg-light-bg h-9 w-24 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-gray-400'>Play</button>
-          {showTickIcon ? <GoodTickIcon /> : ""}
+      <div className='w-2/7'>
+        <div className='my-3 md:my-6 mx-3'>
+          <NavLink className='text-4xl md:text-5xl font-bold text-light-bg'>Kwiz</NavLink>
         </div>
-        {playerIDTaken ? <p className='text-red-500 text-sm'>Player ID taken!</p> : ""}
-        {/* {showTickIcon ?  <p className='text-green-500 text-sm' >Player ID available</p> : ""} */}
+
+        <div className='mx-auto text-center my-2 md:my-4 w-full'>
+          <div className="flex justify-center items-center">
+            <input type="text" placeholder='Enter player ID' onChange={e => setPlayerId(e.target.value)} value={playerID}
+              className={`md:w-80 h-9 m-2 p-4 border-2 outline-none align-middle text-center text-light-bg ${playerIDTaken ? "border-red-500" : ""}`} />
+            <button onClick={verifyPlayerID}
+              className='bg-light-bg h-9 w-24 rounded-sm text-white font-bold text-lg hover:text-light-bg hover:bg-gray-400'>Play</button>
+            {showTickIcon ? <GoodTickIcon /> : ""}
+          </div>
+          {playerIDTaken ? <p className='text-red-500 text-sm'>Player ID taken!</p> : ""}
+          {/* {showTickIcon ?  <p className='text-green-500 text-sm' >Player ID available</p> : ""} */}
+        </div>
       </div>
 
       {showTickIcon ?
-        <div className='bg-gray-300 w-full p-2'>
+        <div className='bg-gray-300 w-full p-2 h-5/7'>
           {currentQuestion && (
             <div>
               <h3 className='text-center text-lg text-light-bg italic'>Question-{currentQuestionIndex + 1}/{questions.length}</h3>
@@ -102,7 +140,8 @@ const QuizPage = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <button className='mx-auto h-9 w-40 rounded-sm text-white font-bold text-lg bg-light-bg m-2 hover:text-light-bg hover:bg-white'>Submit</button>
+            <button onClick={submitAnswers}
+              className='mx-auto h-9 w-40 rounded-sm text-white font-bold text-lg bg-light-bg m-2 hover:text-light-bg hover:bg-white'>Submit</button>
           </div>
         </div> : <SphereLoader />}
     </div>

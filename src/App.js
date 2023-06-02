@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import Dashboard from "./pages/Dashboard";
 import Login from './pages/Login';
 import QuizPage from './pages/QuizPage';
+import Results from './pages/Results';
 import Signup from './pages/Signup';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='/quiz-page' element={<QuizPage />} />
+        <Route exact path='/results' element={<Results />} />
         {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home />} key={index} />)}
 
         {/* Secure routes */}
