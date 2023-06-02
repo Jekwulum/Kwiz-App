@@ -4,14 +4,17 @@ import tokenHelper from './utils/helpers/tokenHelper';
 
 import Accounts from './pages/Accounts';
 import Analytics from './pages/Analytics';
-import Dashboard from "./pages/Dashboard";
 import Files from './pages/Files';
 import Home from './pages/Home';
 import Inbox from "./pages/Inbox";
-import Login from './pages/Login';
+
 import Schedule from './pages/Schedule';
 import Search from './pages/Search';
 import Settings from './pages/Settings';
+
+import Dashboard from "./pages/Dashboard";
+import Login from './pages/Login';
+import QuizPage from './pages/QuizPage';
 import Signup from './pages/Signup';
 
 function App() {
@@ -26,7 +29,8 @@ function App() {
       <Routes>
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
-        {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home/>} key={index} />)}
+        <Route exact path='/quiz-page' element={<QuizPage />} />
+        {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home />} key={index} />)}
 
         {/* Secure routes */}
         <Route exact path='/dashboard' element={<ProtectedRoute Component={Dashboard} />} />

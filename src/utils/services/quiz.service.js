@@ -20,6 +20,13 @@ const QuizService = {
 			method: 'GET',
 			url: `/quiz/${questionId}`
 		})
+	},
+
+	getPlayerByQuizIDAndPlayerID(quizId, playerId) {
+		return Axios({
+			method: 'GET',
+			url: `/quiz/player/${quizId}/${playerId}`
+		})
 	}
 };
 

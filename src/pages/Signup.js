@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import SignupPhoto from "../assets/images/signup_photo.svg";
 import UserService from '../utils/services/user.service';
 import { Loading } from '../utils/helpers/constants';
@@ -55,9 +55,11 @@ const Signup = () => {
   };
 
   return (
-    <div className='flex md:flex-row items-center justify-center mx-auto h-screen space-x-6'>
+    <div className="h-screen">
+      <NavLink to="/" className='text-5xl font-bold text-light-bg'>Kwiz</NavLink>
+      <div className='flex md:flex-row items-center justify-center mx-auto space-x-6'>
       <div className='hidden md:block'>
-        <img src={SignupPhoto} alt='Login Photo' className="h-96 w-64" />
+        <img src={SignupPhoto} alt='Login' className="h-96 w-64" />
       </div>
 
       <div>
@@ -114,6 +116,7 @@ const Signup = () => {
           <p className='text-xs'>Already have an account? <a href="/login" className='text-light-bg'>Sign in here</a></p>
         </div>
       </div>
+    </div>
     </div>
   )
 };
