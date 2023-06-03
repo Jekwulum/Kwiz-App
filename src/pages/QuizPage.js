@@ -94,7 +94,7 @@ const QuizPage = () => {
     <div>
       <div className='w-2/7'>
         <div className='my-3 md:my-6 mx-3'>
-          <NavLink className='text-4xl md:text-5xl font-bold text-light-bg'>Kwiz</NavLink>
+          <NavLink to='/' className='text-4xl md:text-5xl font-bold text-light-bg'>Kwiz</NavLink>
         </div>
 
         <div className='mx-auto text-center my-2 md:my-4 w-full'>
