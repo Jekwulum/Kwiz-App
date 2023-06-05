@@ -114,7 +114,7 @@ const Dashboard = () => {
             <p>What would you like to do today?</p>
             <div className='flex flex-col md:flex-row mt-3 gap-4 mx-auto '>
               <button onClick={createQuiz} className='bg-light-bg h-10 w-60 rounded-lg text-white p-2 text-xs'>Create Quiz</button>
-              <div className='space-x-2 mx-auto'>
+              <div className='space-x-2 md:mx-auto'>
                 <input type="text" placeholder='Enter Quiz Code' onChange={e => setQuizCode(e.target.value)}
                   className='h-8 p-4 w-40 border-2 outline-none align-middle text-center text-light-bg' />
                 <button onClick={e => handleFetchQuizByCode(e)}
