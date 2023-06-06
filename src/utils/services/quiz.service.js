@@ -1,6 +1,14 @@
 import { instance as Axios } from "./axios.service";
 
 const QuizService = {
+	cretaeQuiz(payload) {
+		return Axios({
+			method: 'POST',
+			url: '/quiz/',
+			data: payload
+		})
+	},
+
 	getQuestionsByUserId(userId) {
 		return Axios({
 			method: 'GET',
