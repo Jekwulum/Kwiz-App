@@ -36,16 +36,13 @@ const Dashboard = () => {
     if (quizCode) {
       const { data: responseData } = await QuizService.getQuestionsByQuizId(quizCode);
       if (responseData.status === Loading.SUCCESS) setQuizCodeQuestions(responseData.data);
-      // else setQuizCodeQuestionsError(responseData.message)
     }
   };
 
   const saveQuiz = async (event) => {
     event.preventDefault();
-    const payload = { questions, title: quizTitle, test: "yhd" };
-    console.log(payload);
+    const payload = { questions, title: quizTitle };
     const { data: responseData } = await QuizService.cretaeQuiz(payload);
-    console.log("response: ", responseData);
     if (responseData.status === Loading.SUCCESS) {
       toast.success(responseData.message);
     } else {
