@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import SideMenu from '../components/sideMenu/SideMenu';
+import RenderQuestionsStats from './atom/RenderQuestionsStats';
 
 import { configs } from '../utils/helpers/constants';
 import { fetchUserById } from '../store/slice/userSlice';
@@ -22,8 +23,11 @@ const Dashboard = () => {
   const [quizCode, setQuizCode] = useState("");
   const [quizCodeQuestions, setQuizCodeQuestions] = useState("");
   const [quizTitle, setQuizTitle] = useState("");
+  const [stats, setStats] = useState("");
+  const [loadingStats, setLoadingStats] = useState(true);
   const [questions, setQuestions] = useState([{ question: '', points: 0, options: [''], answer: '' }]);
   const [showAddQuizSection, setAddQuizSection] = useState(false);
+  const [fixedFooter, setFixedFooter] = useState(false);
 
   const { user, loadingUser } = useSelector(state => state.user);
   const userId = tokenHelper.getUserId();
@@ -42,7 +46,7 @@ const Dashboard = () => {
   const saveQuiz = async (event) => {
     event.preventDefault();
     const payload = { questions, title: quizTitle };
-    const { data: responseData } = await QuizService.cretaeQuiz(payload);
+    const { data: responseData } = await QuizService.createQuiz(payload);
     if (responseData.status === Loading.SUCCESS) {
       toast.success(responseData.message);
     } else {
@@ -100,6 +104,21 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
+    const generateStats = async () => {
+      const { data: responseData } = await QuizService.generateStats();
+      console.log(responseData);
+      if (responseData.status === Loading.SUCCESS) {
+        setStats(responseData.data);
+        setLoadingStats(false);
+        setFixedFooter(false)
+      }
+      else {
+        setLoadingStats(true);
+        setFixedFooter(true)
+      }
+    };
+    generateStats();
+
     batch(() => {
       if (loadingUser !== Loading.SUCCESS) dispatch(fetchUserById(userId));
       if (loadingUserQuestions !== Loading.SUCCESS) dispatch(fetchQuestionsByUserId(userId));
@@ -128,13 +147,13 @@ const Dashboard = () => {
             <div className='mt-4'>
               <p>What would you like to do today?</p>
               <div className='flex flex-col md:flex-row mt-3 space-y-2 md:space-y-0 mx-auto'>
-                <button onClick={(e) => setAddQuizSection(!showAddQuizSection)} className='bg-light-bg h-10 w-60 rounded-lg text-white p-2 text-xs'>Create Quiz</button>
-                <div className='space-x-2 md:mx-auto'>
-                  <input type="text" placeholder='Enter Quiz Code' onChange={e => setQuizCode(e.target.value)}
-                    className='h-8 p-4 w-40 border-2 outline-none align-middle text-center text-light-bg' />
-                  <button onClick={e => handleFetchQuizByCode(e)}
-                    className='bg-light-bg h-10 w-16 rounded-lg text-white p-2 text-xs'>View</button>
-                </div>
+                <button onClick={(e) => { setAddQuizSection(!showAddQuizSection); setFixedFooter(false) }} className='bg-light-bg h-10 w-60 rounded-lg text-white p-2 text-xs'>Create Quiz</button>
+                {/* <div className='space-x-2 md:mx-auto'>
+                      <input type="text" placeholder='Enter Quiz Code' onChange={e => setQuizCode(e.target.value)}
+                        className='h-8 p-4 w-40 border-2 outline-none align-middle text-center text-light-bg' />
+                      <button onClick={e => handleFetchQuizByCode(e)}
+                        className='bg-light-bg h-10 w-16 rounded-lg text-white p-2 text-xs'>View</button>
+                    </div> */}
               </div>
             </div>
             {showAddQuizSection ?
@@ -149,13 +168,12 @@ const Dashboard = () => {
                   <div key={questionIndex} className='flex flex-col border-b-4 border-b-light-bg dark:border-b-blue-100 mb-2'>
 
                     <div>
-                      <textarea type="text" value={questionObj.question} placeholder='Question' cols={'40'}
+                      <textarea type="text" value={questionObj.question} placeholder='Question' cols={'30'}
                         onChange={(e) => handleQuestionsChange(questionIndex, e.target.value)}
                         className='border-none my-1 p-2 border-2 outline-none align-middle text-light-bg' />
                     </div>
 
                     <div>
-
                       <input type="number" value={questionObj.points} placeholder='Points' name='points'
                         onChange={(e) => handlePointsChange(questionIndex, e.target.value)}
                         className='border-none my-1 p-1 border-2 outline-none align-middle text-light-bg' />
@@ -165,7 +183,7 @@ const Dashboard = () => {
                       <div key={optionIndex} className='flexd align-middle items-center'>
                         <input type="text" value={option} placeholder={`Option ${optionIndex + 1}`}
                           onChange={(e) => handleOptionChange(questionIndex, optionIndex, e.target.value)}
-                          className='border-none h-7 w-72 my-1 p-2 border-2 outline-none align-middle text-light-bg' />
+                          className='border-none h-7 md:w-72 my-1 p-2 border-2 outline-none align-middle text-light-bg' />
                         <input type="radio" name={`answer-${questionIndex}`} value={option}
                           checked={questionObj.answer === option} className='relative right-5 top-1'
                           onChange={() => handleAnswerChange(questionIndex, option)} />
@@ -189,9 +207,13 @@ const Dashboard = () => {
                 <button onClick={saveQuiz} className='bg-green-500 h-10 w-24 my-1 mx-4 rounded-lg text-white p-1 text-xs'>Save Quiz</button>
               </div>
               : ""}
+
+            {loadingStats ? "" : <RenderQuestionsStats stats={stats} />}
           </div>
+
+
         </div>
-        <Footer fixed={!showAddQuizSection} />
+        <Footer fixed={fixedFooter} />
       </div>
       {/* </div> */}
     </div>

@@ -1,7 +1,7 @@
 import { instance as Axios } from "./axios.service";
 
 const QuizService = {
-	cretaeQuiz(payload) {
+	createQuiz(payload) {
 		return Axios({
 			method: 'POST',
 			url: '/quiz/',
@@ -50,6 +50,13 @@ const QuizService = {
 			method: 'PATCH',
 			url: `quiz/player/update-score/${playerId}/${quizId}`,
 			data: payload
+		})
+	},
+
+	generateStats(userId) {
+		return Axios({
+			method: 'GET',
+			url: `/quiz/stats/user-stats/${userId}`
 		})
 	}
 };

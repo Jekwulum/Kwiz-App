@@ -40,7 +40,6 @@ const Login = () => {
     if (tokenData) {
       await setLoggedInUser(responseData.access, tokenData);
       setLoadingStatus(false);
-      navigate('/dashboard');
     } else {
       setLoginErrorStatus(false);
       setLoadingStatus(false);
