@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   AccountIcon, AnalyticsIcon, ArrowCircleIcon, DashboardIcon, FilesIcon, AppIcon,
-  InboxIcon, ScheduleIcon, SearchIcon, SettingsIcon
+  QuestionsIcon, ScheduleIcon, SearchIcon, SettingsIcon
 } from "../svgIcons/MenuIcons";
 
 const SideMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
   const Menus = [
     { title: "Dashboard", icon: <DashboardIcon /> },
-    { title: "Inbox", icon: <InboxIcon /> },
+    { title: "Questions", icon: <QuestionsIcon /> },
     { title: "Accounts", icon: <AccountIcon />, gap: true },
     { title: "Schedule ", icon: <ScheduleIcon /> },
     { title: "Search", icon: <SearchIcon /> },

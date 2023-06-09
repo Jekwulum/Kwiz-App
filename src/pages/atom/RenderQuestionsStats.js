@@ -12,7 +12,7 @@ const RenderQuestionsStats = ({ stats }) => {
             <div className='text-gray-500'>{titles[questionObj.quizId]} question{titles[questionObj.quizId] > 1 ? "s" : ""}</div>
             <div className='text-2xl text-black'>{questionObj.title}</div>
             {/* <div>ID: {questionObj.quizId}</div> */}
-            <div className='text-light-bg'>{players[questionObj.quizId]} player{players[questionObj.quizId] == 1 ? "" : "s"}</div>
+            <div className='text-light-bg'>{players[questionObj.quizId]} player{players[questionObj.quizId] === 1 ? "" : "s"}</div>
           </div>
 
           <button className='bg-light-bg h-10 w-24 mt-1 rounded-lg text-white p-2 text-xs'>View</button>

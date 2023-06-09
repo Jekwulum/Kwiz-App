@@ -6,7 +6,6 @@ import Accounts from './pages/Accounts';
 import Analytics from './pages/Analytics';
 import Files from './pages/Files';
 import Home from './pages/Home';
-import Inbox from "./pages/Inbox";
 
 import Schedule from './pages/Schedule';
 import Search from './pages/Search';
@@ -14,6 +13,7 @@ import Settings from './pages/Settings';
 
 import Dashboard from "./pages/Dashboard";
 import Login from './pages/Login';
+import Questions from "./pages/Questions";
 import QuizPage from './pages/QuizPage';
 import Results from './pages/Results';
 import Signup from './pages/Signup';
@@ -30,6 +30,7 @@ function App() {
       <Routes>
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
+        <Route exact path='/questions' element={<ProtectedRoute Component={Questions} />} />
         <Route exact path='/quiz-page' element={<QuizPage />} />
         <Route exact path='/results' element={<Results />} />
         {["/", "/home"].map((path, index) => <Route exact path={path} element={<Home />} key={index} />)}
@@ -39,7 +40,6 @@ function App() {
         <Route exact path='/accounts' element={<ProtectedRoute Component={Accounts} />} />
         <Route exact path='/analytics' element={<ProtectedRoute Component={Analytics} />} />
         <Route exact path='/files' element={<ProtectedRoute Component={Files} />} />
-        <Route exact path='/inbox' element={<ProtectedRoute Component={Inbox} />} />
         <Route exact path='/schedule' element={<ProtectedRoute Component={Schedule} />} />
         <Route exact path='/search' element={<ProtectedRoute Component={Search} />} />
         <Route exact path='/settings' element={<ProtectedRoute Component={Settings} />} />

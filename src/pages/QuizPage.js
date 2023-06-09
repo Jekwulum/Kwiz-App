@@ -111,7 +111,7 @@ const QuizPage = () => {
       </div>
 
       {showTickIcon ?
-        <div className='bg-gray-300 w-full p-2 h-5/7'>
+        <div className='bg-gray-100 w-full p-2 h-5/7'>
           {currentQuestion && (
             <div>
               <h3 className='text-center text-lg text-light-bg italic'>Question-{currentQuestionIndex + 1}/{questions.length}</h3>

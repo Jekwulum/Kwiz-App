@@ -157,35 +157,29 @@ const Dashboard = () => {
               </div>
             </div>
             {showAddQuizSection ?
-              <div className='mt-1 rounded-md bg-blue-100 dark:bg-gray-600 w-full md:w-9/12 p-4'>
+              <div className='flex flex-col mx-auto items-center mt-3 rounded-md bg-blue-100 dark:bg-gray-600 w-full md:w-9/12 p-1'>
 
-                <div className='md:mx-auto'>
+                {/* <div className='md:mx-auto my-2'> */}
                   <input type="text" placeholder='Enter Quiz Title' onChange={e => setQuizTitle(e.target.value)}
-                    className='h-8 p-2 w-52 outline-none align-middle text-light-bg' value={quizTitle} />
-                </div>
+                    className='h-8 p-2 w-3/5 my-2 outline-none align-middle text-light-bg' value={quizTitle} />
+                {/* </div> */}
 
                 {questions.map((questionObj, questionIndex) => (
-                  <div key={questionIndex} className='flex flex-col border-b-4 border-b-light-bg dark:border-b-blue-100 mb-2'>
+                  <div key={questionIndex} className='flex flex-col mx-auto w-4/5 items-center rounded-lg p-2 border-t-4 border-b-4 border-light-bg dark:border-b-blue-100 mb-2'>
 
-                    <div>
-                      <textarea type="text" value={questionObj.question} placeholder='Question' cols={'30'}
+                    {/* <div> */}
+                      <input type="text" value={questionObj.question} placeholder='Question'
                         onChange={(e) => handleQuestionsChange(questionIndex, e.target.value)}
-                        className='border-none my-1 p-2 border-2 outline-none align-middle text-light-bg' />
-                    </div>
-
-                    <div>
-                      <input type="number" value={questionObj.points} placeholder='Points' name='points'
-                        onChange={(e) => handlePointsChange(questionIndex, e.target.value)}
-                        className='border-none my-1 p-1 border-2 outline-none align-middle text-light-bg' />
-                    </div>
+                        className='border-none w-full my-1 p-2 border-2 outline-none align-middle text-light-bg' />
+                    {/* </div> */}
 
                     {questionObj.options.map((option, optionIndex) => (
-                      <div key={optionIndex} className='flexd align-middle items-center'>
+                      <div key={optionIndex} className='flex align-middle justify-end mr-3 w-full'>
                         <input type="text" value={option} placeholder={`Option ${optionIndex + 1}`}
                           onChange={(e) => handleOptionChange(questionIndex, optionIndex, e.target.value)}
-                          className='border-none h-7 md:w-72 my-1 p-2 border-2 outline-none align-middle text-light-bg' />
+                          className='border-none w-4/5 h-7 my-1 p-2 border-2 outline-none align-middle text-light-bg' />
                         <input type="radio" name={`answer-${questionIndex}`} value={option}
-                          checked={questionObj.answer === option} className='relative right-5 top-1'
+                          checked={questionObj.answer === option} className='relative right-4 top-0'
                           onChange={() => handleAnswerChange(questionIndex, option)} />
                         <button onClick={() => removeOption(questionIndex, optionIndex)}><i className="zmdi zmdi-delete w-1 text-red-600"></i></button>
                       </div>
@@ -193,11 +187,13 @@ const Dashboard = () => {
 
                     <button onClick={() => addOption(questionIndex)}
                       className='bg-green-500 h-10 my-1 w-24 rounded-lg text-white p-2 text-xs'>Add Option</button>
-                    {/* <div>
-                    <textarea type="text" value={questionObj.answer} placeholder='Answer' cols={'40'}
-                      onChange={(e) => handleAnswerChange(questionIndex, e.target.value)}
-                      className='border-none my-1 p-2 border-2 outline-none align-middle text-light-bg' />
-                  </div> */}
+
+                    <div className='flex justify-start'>
+                      <input type="number" value={questionObj.points} placeholder='Points' name='points'
+                        onChange={(e) => handlePointsChange(questionIndex, e.target.value)}
+                        className='border-none w-full my-1 border-2 outline-none align-middle text-light-bg' />
+                    </div>
+
                     <button onClick={() => removeQuestion(questionIndex)}
                       className={`bg-red-500 h-10 my-1 mb-4 w-32 rounded-lg text-white p-2 text-xs`}>Remove Question</button>
                   </div>
